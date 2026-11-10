@@ -1,0 +1,60 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      # Gate the deploy on the rules tests: a red build must never reach the site.
+      - run: npm test
+
+      # And on an actual playthrough in headless Chrome: catch, spin a tower,
+      # beat a gym, win a mega raid, evolve and Mega Evolve. The script serves
+      # the repo itself, so no dev server is needed.
+      - name: End-to-end playtest
+        run: npm run playtest -- "" playtest.png
+
+      - name: Upload playtest screenshot
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: playtest-screenshot
+          path: playtest.png
+          if-no-files-found: ignore
+
+      - run: npm run build
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0f1226">
+<meta name="description" content="Mega Blockmon: explore, catch monsters with capture blocks, battle gyms and raids, evolve and Mega Evolve.">
+<title>Mega Blockmon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="world"></canvas>
+
+<header id="hud">
+  <button id="trainerBtn" class="trainer" title="Trainer profile & how to play">
+    <span class="lvl" id="hudLevel">1</span>
+    <span class="tinfo"><span id="hudName">Trainer</span><span class="xpbar"><span id="hudXp"></span></span></span>
+  </button>
+  <div class="hud-right">
+    <span class="pill"><i id="hudBlockIco"></i><b id="hudBlocks">0</b></span>
+    <span class="pill dust">✦ <b id="hudDust">0</b></span>
+    <button class="pill egg-pill hidden" id="hudEgg" title="Eggs"><i class="egg mini"></i><b id="hudEggTxt"></b></button>
+  </div>
+</header>
+<div id="biomeTag"></div>
+
+<nav id="nav">
+  <button data-panel="collection">Blockmon</button>
+  <button data-panel="dex">Blockdex</button>
+  <button data-panel="eggs">Eggs</button>
+  <button data-panel="bag">Bag</button>
+</nav>
+
+<section id="panel" class="hidden">
+  <div class="panel-head"><h2 id="panelTitle"></h2><div id="panelTools"></div><button class="close" id="panelClose" aria-label="Close">✕</button></div>
+  <div id="panelBody"></div>
+</section>
+
+<div id="encounter" class="hidden">
+  <canvas id="encCanvas"></canvas>
+  <button id="runBtn" class="btn ghost small">Run</button>
+  <div id="encInfo"></div>
+  <div id="encBerries"></div>
+  <button id="blockSel"></button>
+  <div id="encHint">Swipe the block up to throw · circle it first for a curveball</div>
+</div>
+
+<div id="battle" class="hidden">
+  <canvas id="battleCanvas"></canvas>
+  <div id="battleUi">
+    <div class="b-top"><button id="quitBtn" class="btn ghost small">Quit</button><div id="battleTitle"></div><div id="battleTimer">0:00</div></div>
+    <div class="b-bottom">
+      <button id="swapBtn" class="btn ghost small">Swap</button>
+      <button id="chargedBtn"></button>
+      <button id="dodgeBtn" class="btn ghost small">Dodge</button>
+    </div>
+    <div class="b-hint">Tap to attack · swipe sideways to dodge</div>
+  </div>
+</div>
+
+<div id="modal" class="hidden"><div class="modal-card" id="modalCard"></div></div>
+<div id="toasts"></div>
+
+<script src="js/data.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/state.js"></script>
+<script src="js/world.js"></script>
+<script src="js/encounter.js"></script>
+<script src="js/battle.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

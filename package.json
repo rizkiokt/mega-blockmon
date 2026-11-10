@@ -1,0 +1,13 @@
+{
+  "name": "mega-blockmon",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Mega Blockmon: explore, catch monsters with capture blocks, battle gyms and raids, evolve and Mega Evolve.",
+  "scripts": {
+    "dev": "python3 -m http.server 5180",
+    "test": "node --test tests/*.test.mjs",
+    "playtest": "node scripts/playtest.mjs",
+    "build": "node scripts/build.mjs"
+  }
+}

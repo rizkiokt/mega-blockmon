@@ -1,0 +1,4 @@
+node_modules/
+_site/
+playtest.png
+.DS_Store
